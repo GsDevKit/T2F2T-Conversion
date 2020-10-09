@@ -1,0 +1,10 @@
+SYNOPSIS:
+	t2f2t.sh [-h | --help]
+	t2f2t.sh --t2f <source-package-directory> <destination-package-directory
+	t2f2t.sh --f2t <source-package-directory> <destination-package-directory
+
+DESCRIPTION
+
+EXAMPLES:
+	t2f2t.sh                     # regenerate .gs files compiling all methods
+

@@ -1,8 +1,0 @@
-  set u SystemUser p swordfish
-  set solologin on
-  login
-
-time
-run
-%
-time
