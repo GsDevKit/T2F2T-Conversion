@@ -1,0 +1,11 @@
+RwProjectSpecificationV2 {
+	#specName : 'Tonel_to_Filetree_Converter',
+	#projectSpecPath : 'rowan',
+	#componentsPath : 'rowan/components',
+	#packagesPath : 'rowan/src',
+	#projectsPath : 'rowan/projects',
+	#specsPath : 'rowan/specs',
+	#packageFormat : 'tonel',
+	#packageConvention : 'Rowan',
+	#comment : ''
+}
