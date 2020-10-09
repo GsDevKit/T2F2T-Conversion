@@ -22,6 +22,16 @@ T2F2TConversion class >> helpText [
 		/ 't2f2t-help.txt') contents
 ]
 
+{ #category : 'private' }
+T2F2TConversion >> _message: message to: stdout [
+	stdout
+		lf;
+		nextPutAll: message;
+		lf;
+		lf.
+	self usageMessage: stdout
+]
+
 { #category : 'command-line support' }
 T2F2TConversion >> processCommandLine: stdout [
 	| args scriptArgStart directoryArgsList polarity |
@@ -44,47 +54,30 @@ T2F2TConversion >> processCommandLine: stdout [
 						ifTrue: [ polarity := arg ]
 						ifFalse: [ 
 							(arg beginsWith: '-')
-								ifTrue: [ 
-									stdout
-										lf;
-										nextPutAll: 'UNKNOWN argument ' , arg printString;
-										lf;
-										lf.
-									^ self usageMessage: stdout ]
+								ifTrue: [ ^ self _message: 'UNKNOWN argument ' , arg printString to: stdout ]
 								ifFalse: [ directoryArgsList add: arg ] ] ].
 			directoryArgsList size = 2
 				ifFalse: [ 
-					stdout
-						lf;
-						nextPutAll:
-								'missing positional arguments (source and destination directories)';
-						lf;
-						lf.
-					^ self usageMessage: stdout ].
+					^ self
+						_message:
+							'missing positional arguments (source and destination directories)'
+						to: stdout ].
 			polarity == '--t2f'
 				ifTrue: [ 
-					self
+					^ self
 						convertTonelPackagesIn: (directoryArgsList at: 1)
 						toFiletreePackagesIn: (directoryArgsList at: 2) ].
 			polarity == '--f2t'
 				ifTrue: [ 
-					self
+					^ self
 						convertFiletreePackagesIn: (directoryArgsList at: 1)
 						toTonelPackagesIn: (directoryArgsList at: 2) ].
-			stdout
-				lf;
-				nextPutAll: 'missing required argument [ --t2f | --f2t ]';
-				lf;
-				lf.
-			^ self usageMessage: stdout ]
+			^ self _message: 'missing required argument [ --t2f | --f2t ]' to: stdout ]
 		ifFalse: [ 
-			stdout
-				lf;
-				nextPutAll:
-						'topaz solo launched without '' -- '', so it is not possible to process command line arguments';
-				lf;
-				lf.
-			^ self usageMessage: stdout ]
+			^ self
+				_message:
+					'topaz solo launched without '' -- '', so it is not possible to process command line arguments'
+				to: stdout ]
 ]
 
 { #category : 'command-line support' }
