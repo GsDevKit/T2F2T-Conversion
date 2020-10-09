@@ -1,0 +1,14 @@
+RwSimpleProjectLoadComponentV2 {
+	#name : 'Core',
+	#condition : 'common',
+	#projectNames : [ ],
+	#componentNames : [
+		'tests/Tests'
+	],
+	#packageNames : [
+		'RowanSample9-Core',
+		'RowanSample9-Extensions',
+		'RowanSample9-GemStone'
+	],
+	#comment : 'Primary component used for loading the core classes.'
+}
