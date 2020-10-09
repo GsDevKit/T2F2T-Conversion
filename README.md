@@ -6,15 +6,64 @@ Rowan-based scripts for converting package repositories from Tonel to Filetree a
 SYNOPSIS:
 	t2f2t.sh [-h | --help]
 
-	t2f2t.sh --tonel=<tonel-package-directory> --filetree=<filetree-package-directory
+	t2f2t.sh --tonel=<tonel-pkg-dir> --filetree=<filetree-pkg-dir> --t2f2t=<t2f2t-data-dir>
 
-	t2f2t.sh --t2f <source-package-directory> <destination-package-directory
-	t2f2t.sh --f2t <source-package-directory> <destination-package-directory
+	t2f2t.sh --t2f <t2f2t-data-dir>
+	t2f2t.sh --f2t <t2f2t-data-dir>
+
+OPTIONS
+	-h, --help
+		display this message.
+
+  --tonel=<tonel-pkg-dir>
+		the directory where the tonel packages are located.
+
+	--filetree=<filetree-pkg-dir>
+		the directory where the filetree packages are located.
+
+	--t2f2t=<t2f2t-data-dir>
+		the directory where the t2f2t meta data is located.
+
+	--t2f <t2f2t-data-dir>
+		copy the packages in the tonel directory to the filetree directory
+		and convert to filetree format.
+
+	--f2t <t2f2t-data-dir>
+		copy the packages in the filetree directory to the tonel directory
+		and convert to tonel format.
+
+INSTALLATION
 
 DESCRIPTION
-	The t2f2t.sh script converts tonel package format to filetree package format
-	using Rowan to manage the conversion. The script does not 
+	The t2f2t.sh script converts tonel package format repositories to filetree 
+	package format repositories using Rowan to manage the conversion.
+
+	The expected usage is that the filetree package directories, tonel package
+	directories, and t2f2t meta data directory will be co-resident in the same
+	git repository, however, all three directories are independently specified
+	so you may configure the directories as you see fit.
+
+	To get started, you will run the following script to register the tonel and
+	filetree package directories and create the tsf2t meta data:
+
+		t2f2t.sh --tonel=<tonel-pkg-dir> --filetree=<filetree-pkg-dir> --t2f2t=<t2f2t-data-dir>
+
+	Then you can run either of the other two forms of the command, depending upon
+	which format is the primary:
+
+		t2f2t.sh --t2f <t2f2t-data-dir>
+	OR
+		t2f2t.sh --f2t <t2f2t-data-dir>
+
+  On each invocation the t2f2t.sh script copies and converts all of the 
+	packages in the source directory to the destination directory. The 
+	t2f2t.sh script does not delete any packages from the destination 
+	directory.
 
 EXAMPLES:
-	t2f2t.sh --tonel=src --filetree=filetree --meta=t2f2t
-``
+	t2f2t.sh --tonel=src --filetree=filetree --meta=t2f2t # create t2f2t metadata directory
+
+	t2f2t.sh --t2f t2f2t                                  # convert package from tonel to filetree
+
+	t2f2t.sh --f2t t2f2t                                  # convert packages from filetree to tonel
+```

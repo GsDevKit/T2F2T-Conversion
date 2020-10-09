@@ -16,12 +16,6 @@ T2F2TConversion class >> executeCommandLine [
 	self new processCommandLine: GsFile stdout
 ]
 
-{ #category : 'command-line support' }
-T2F2TConversion class >> helpText [
-	((Rowan projectNamed: self _projectName) repositoryRoot / 'bin'
-		/ 't2f2t-help.txt') contents
-]
-
 { #category : 'private' }
 T2F2TConversion >> _message: message to: stdout [
 	stdout
@@ -82,6 +76,8 @@ T2F2TConversion >> processCommandLine: stdout [
 
 { #category : 'command-line support' }
 T2F2TConversion >> usageMessage: stdout [
+	"this method and the project README.md man page section (https://github.com/GsDevKit/T2F2T-Conversion#man-page) should be kept in sync"
+
 	stdout
 		lf;
 		nextPutAll: 'SYNOPSIS:';
@@ -101,8 +97,7 @@ T2F2TConversion >> usageMessage: stdout [
 		lf;
 		nextPutAll: 'EXAMPLES:';
 		lf;
-		nextPutAll:
-				'	t2f2t.sh';
+		nextPutAll: '	t2f2t.sh';
 		lf;
 		lf
 ]
