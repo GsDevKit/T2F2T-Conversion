@@ -1,17 +1,18 @@
-  set u SystemUser p swordfish
+#
   set solologin on
+  set u SystemUser p swordfish
   login
 
-time
 run
+	| rootDir specFile |
 	"install the script code into the topaz solo image"
-	GsFile sdout nextPutAll: 'Installing t2f2t project'.
+	rootDir := '$binDir/..' asFileReference pathString.
+	specFile := rootDir, '/rowan/specs/T2F2T-Conversion.ston' asFileReference pathString.
 	(Rowan
-		projectFromUrl: 'file://$binDir/../rowan/specs/T2F2T-Conversion.ston'
-		gitUrl: 'file://$binDir/..') load
+		projectFromUrl: 'file://', specFile
+		gitUrl: 'file://', rootDir) load
 %
 
 run
 	T2F2TConversion executeCommandLine
 %
-time
