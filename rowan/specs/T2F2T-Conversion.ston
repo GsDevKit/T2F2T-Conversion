@@ -1,6 +1,6 @@
 RwLoadSpecificationV2 {
-	#projectName : 'Tonel_to_Filetree_Converter',
-	#gitUrl : 'file:///home/dhenrich/rogue/_homes/rogue/_home/shared/repos/XML-XMLParser',
+	#projectName : 'T2F2T-Conversion',
+	#gitUrl : 'file:///home/dhenrich/rogue/_homes/rogue/_home/shared/repos/T2F2T-Conversion',
 	#revision : 'gemstone',
 	#projectSpecFile : 'rowan/project.ston',
 	#componentNames : [

@@ -4,7 +4,7 @@ RwSimpleProjectLoadComponentV2 {
 	#projectNames : [ ],
 	#componentNames : [ ],
 	#packageNames : [
-		'Tonel_to_Filetree_Converter-Core'
+		'T2F2T-Conversion-Core'
 	],
 	#comment : ''
 }

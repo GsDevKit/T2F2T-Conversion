@@ -1,5 +1,5 @@
 RwProjectSpecificationV2 {
-	#specName : 'Tonel_to_Filetree_Converter',
+	#specName : 'T2F2T-Conversion',
 	#projectSpecPath : 'rowan',
 	#componentsPath : 'rowan/components',
 	#packagesPath : 'rowan/src',
