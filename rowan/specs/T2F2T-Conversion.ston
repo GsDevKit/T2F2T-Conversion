@@ -2,7 +2,7 @@ RwLoadSpecificationV2 {
 	#projectName : 'T2F2T-Conversion',
 	#gitUrl : 'file:///home/dhenrich/rogue/_homes/rogue/_home/shared/repos/T2F2T-Conversion',
 	#revision : 'gemstone',
-	#projectSpecFile : 'rowan/project.ston',
+	#projectSpecFile : 'rowan/T2F2T-Conversion.ston',
 	#componentNames : [
 		'Core'
 	],

@@ -3,12 +3,13 @@
 projectName := 'T2F2T-Conversion'.
 componentName := 'Core'.
 packageName := projectName, '-Core'.
-className := projectName.
+className := 'T2F2TConversion'.
 project := (Rowan newProjectNamed: projectName)
 	packageConvention: 'Rowan';
 	packageFormat: 'tonel';
 	projectsHome: '/home/dhenrich/rogue/_homes/rogue/_home/shared/repos';
 	gitUrl: 'file:///home/dhenrich/rogue/_homes/rogue/_home/shared/repos/T2F2T-Conversion';
+  projectSpecFile: 'rowan/', projectName, '.ston';
 	revision: 'gemstone';
 	yourself.
 project _projectSpecification
