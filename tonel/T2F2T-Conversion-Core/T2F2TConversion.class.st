@@ -26,9 +26,7 @@ T2F2TConversion >> _message: message to: stdout [
 	stdout
 		lf;
 		nextPutAll: message;
-		lf;
-		tab;
-		nextPutAll: 'See help (t2t2t.sh --help) for details';
+		nextPutAll: '. See help (t2t2t.sh --help) for details';
 		lf
 ]
 
