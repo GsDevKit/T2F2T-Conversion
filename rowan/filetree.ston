@@ -6,6 +6,6 @@ RwProjectSpecificationV2 {
 	#projectsPath : 'rowan/projects',
 	#specsPath : 'rowan/specs',
 	#packageFormat : 'filetree',
-	#packageConvention : 'Rowan',
+	#packageConvention : 'RowanHybrid',
 	#comment : 't2f2t project specification for using filetree format packages'
 }

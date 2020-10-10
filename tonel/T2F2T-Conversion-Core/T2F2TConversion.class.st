@@ -1,7 +1,7 @@
 Class {
 	#name : 'T2F2TConversion',
 	#superclass : 'Object',
-	#category : 'T2F2T-Conversion'
+	#category : 'T2F2T-Conversion-Core'
 }
 
 { #category : 'private' }
