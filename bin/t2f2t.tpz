@@ -9,7 +9,7 @@
 	| rootDir specFile |
 	"install the script code into the topaz solo image"
 	rootDir := '$binDir/..' asFileReference pathString.
-	specFile := rootDir, '/rowan/specs/T2F2T-Conversion.ston' asFileReference pathString.
+	specFile := rootDir, '/rowan/specs/tonel.ston' asFileReference pathString.
 	[
 		(Rowan
 			projectFromUrl: 'file://', specFile
