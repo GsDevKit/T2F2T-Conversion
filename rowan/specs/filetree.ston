@@ -1,5 +1,5 @@
 RwLoadSpecificationV2 {
-	#projectName : 'filetree',
+	#projectName : 'T2F2T-Conversion',
 	#gitUrl : 'file:///home/dhenrich/rogue/_homes/rogue/_home/shared/repos/T2F2T-Conversion',
 	#revision : 'gemstone',
 	#projectSpecFile : 'rowan/filetree.ston',
