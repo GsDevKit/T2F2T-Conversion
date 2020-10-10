@@ -27,8 +27,6 @@ OPTIONS
 		copy the packages in the filetree directory to the tonel directory
 		and convert to tonel format.
 
-INSTALLATION
-
 DESCRIPTION
 	The t2f2t.sh script converts tonel package format repositories to filetree 
 	package format repositories using Rowan to manage the conversion.

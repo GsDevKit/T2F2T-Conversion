@@ -17,8 +17,8 @@ T2F2TConversion class >> executeCommandLine [
 ]
 
 { #category : 'private' }
-T2F2TConversion >> _helpFileName [
-	^ 't2f2t-help.txt'
+T2F2TConversion >> _manPagePath [
+	^ 'docs/man.txt'
 ]
 
 { #category : 'private' }
@@ -104,7 +104,7 @@ T2F2TConversion >> processCommandLine: stdout [
 T2F2TConversion >> usageMessage: stdout [
 	| root read |
 	root := (Rowan projectNamed: self class _projectName) repositoryRoot.
-	read := ReadStreamPortable on: (root / 'bin' / self _helpFileName) contents.
+	read := ReadStreamPortable on: (root / self _manPagePath) contents.
 	[ read atEnd ]
 		whileFalse: [ 
 			stdout
