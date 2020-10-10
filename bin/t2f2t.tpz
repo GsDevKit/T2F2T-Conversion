@@ -3,7 +3,9 @@
   set u SystemUser p swordfish
   login
 
-run
+	display oops
+
+	run
 	| rootDir specFile |
 	"install the script code into the topaz solo image"
 	rootDir := '$binDir/..' asFileReference pathString.

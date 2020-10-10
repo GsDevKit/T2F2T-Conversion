@@ -28,10 +28,12 @@ T2F2TConversion >> _message: message to: stdout [
 
 { #category : 'command-line support' }
 T2F2TConversion >> processCommandLine: stdout [
-	| args scriptArgStart directoryArgsList polarity |
+	| args scriptArgStart directoryArgsList command createArgsList |
 	args := System commandLineArguments.
 	scriptArgStart := args indexOf: '--'.
 	directoryArgsList := {}.
+	createArgsList := {}.
+	command := nil.
 	scriptArgStart > 0
 		ifTrue: [ 
 			| argIndex argsSize |
@@ -45,28 +47,46 @@ T2F2TConversion >> processCommandLine: stdout [
 					arg = '--help' | (arg = '-h')
 						ifTrue: [ ^ self usageMessage: stdout ].
 					arg = '--t2f' | (arg = '--f2t')
-						ifTrue: [ polarity := arg ]
+						ifTrue: [ command := arg ]
 						ifFalse: [ 
-							(arg beginsWith: '-')
-								ifTrue: [ ^ self _message: 'UNKNOWN argument ' , arg printString to: stdout ]
-								ifFalse: [ directoryArgsList add: arg ] ] ].
-			directoryArgsList size = 2
+							(#('--tonel' '--filetree' '--t2f2t')
+								detect: [ :each | arg beginsWith: each ]
+								ifNone: [  ]) notNil
+								ifTrue: [ 
+									command := 'create'.
+									createArgsList add: arg ]
+								ifFalse: [ 
+									(arg beginsWith: '-')
+										ifTrue: [ ^ self _message: 'UNKNOWN argument ' , arg printString to: stdout ]
+										ifFalse: [ directoryArgsList add: arg ] ] ] ].
+			command ~~ 'create'
+				ifTrue: [ 
+					"doing conversion"
+					directoryArgsList size ~= 2
+						ifTrue: [ 
+							^ self
+								_message:
+									'missing positional arguments (source and destination directories)'
+								to: stdout ].
+					command = '--t2f'
+						ifTrue: [ 
+							^ self
+								convertTonelPackagesIn: (directoryArgsList at: 1)
+								toFiletreePackagesIn: (directoryArgsList at: 2) ].
+					command = '--f2t'
+						ifTrue: [ 
+							^ self
+								convertFiletreePackagesIn: (directoryArgsList at: 1)
+								toTonelPackagesIn: (directoryArgsList at: 2) ].
+					^ self _message: 'missing required argument [ --t2f | --f2t ]' to: stdout ]
 				ifFalse: [ 
-					^ self
-						_message:
-							'missing positional arguments (source and destination directories)'
-						to: stdout ].
-			polarity == '--t2f'
-				ifTrue: [ 
-					^ self
-						convertTonelPackagesIn: (directoryArgsList at: 1)
-						toFiletreePackagesIn: (directoryArgsList at: 2) ].
-			polarity == '--f2t'
-				ifTrue: [ 
-					^ self
-						convertFiletreePackagesIn: (directoryArgsList at: 1)
-						toTonelPackagesIn: (directoryArgsList at: 2) ].
-			^ self _message: 'missing required argument [ --t2f | --f2t ]' to: stdout ]
+					"creating metadata"
+					createArgsList size ~= 3
+						ifTrue: [ 
+							self
+								_message: 'missing required arguments [--tonel --filetree --t2f2t ]'
+								to: stdout ].
+					^ self processCreateMetadataArgs: createArgsList ] ]
 		ifFalse: [ 
 			^ self
 				_message:
