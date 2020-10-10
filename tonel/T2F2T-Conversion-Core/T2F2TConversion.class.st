@@ -30,6 +30,10 @@ T2F2TConversion >> _message: message to: stdout [
 		lf
 ]
 
+{ #category : 'create' }
+T2F2TConversion >> createForProject: projectRoot t2f2t: t2f2tDir tonel: tonelPackageDir filetree: filePackageDir [
+]
+
 { #category : 'command-line support' }
 T2F2TConversion >> processCommandLine: stdout [
 	| args scriptArgStart command commandArgs argIndex argsSize |
@@ -66,17 +70,18 @@ T2F2TConversion >> processCommandLine: stdout [
 				ifNotNil: [ commandArgs add: arg ] ].
 	command = 'create'
 		ifTrue: [ 
-			commandArgs size ~= 3
+			commandArgs size ~= 4
 				ifTrue: [ 
 					^ self
 						_message:
-							'expected 3 positional arguments for create command (t2f2t-data-dir, tonel-pkg-dir, and filetree-pkg-dir), got '
+							'expected 4 positional arguments for create command (project-root, t2f2t-data-dir, tonel-pkg-dir, and filetree-pkg-dir), got '
 								, commandArgs size printString
 						to: stdout ].
 			^ self
-				createUsing: (commandArgs at: 1)
-				tonel: (commandArgs at: 2)
-				filetree: (commandArgs at: 3) ].
+				createForProject: (commandArgs at: 1)
+				t2f2t:  (commandArgs at: 2)
+				tonel: (commandArgs at: 3)
+				filetree: (commandArgs at: 4) ].
 	commandArgs size ~= 1
 		ifTrue: [ 
 			^ self
