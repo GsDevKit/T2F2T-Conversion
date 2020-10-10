@@ -24,6 +24,10 @@ T2F2TConversion class >> executeCommandLine [
 	self new processCommandLine: GsFile stdout
 ]
 
+{ #category : 'filetree/tonel commands' }
+T2F2TConversion >> _copyPackagesFrom: sourceProject to: targetProject [
+]
+
 { #category : 'create command' }
 T2F2TConversion >> _createProject: projectName packageConvention: packageConvention root: root t2f2tDir: t2f2tDir packageDir: packageDir componentName: componentName format: format [
 	| project resolvedProject |
@@ -32,7 +36,6 @@ T2F2TConversion >> _createProject: projectName packageConvention: packageConvent
 		packageFormat: format;
 		diskUrl: 'file://' , root pathString;
 		projectSpecFile: t2f2tDir , '/' , format , '.ston';
-		revision: 'gemstone';
 		specName: format;
 		yourself.
 	project _projectSpecification
@@ -67,6 +70,47 @@ T2F2TConversion >> _message: message to: stdout [
 		nextPutAll: message;
 		nextPutAll: '. See help (t2t2t.sh --help) for details';
 		lf
+]
+
+{ #category : 'filetree/tonel commands' }
+T2F2TConversion >> convertTo: targetFormat packagesUsing: t2f2tPath stdout: stdout [
+	| t2f2tRoot tonelProject filetreeProject targetProject sourceProject |
+	t2f2tRoot := t2f2tPath asFileReference.
+	t2f2tRoot exists
+		ifFalse: [ 
+			^ self
+				error:
+					'The t2f2t metadata directory ' , t2f2tRoot printString , ' does not exist.'
+				to: stdout ].
+	tonelProject := Rowan
+		projectFromUrl: 'file://' , (t2f2tRoot / 'specs' / 'tonel.ston') pathString.
+	filetreeProject := Rowan
+		projectFromUrl: 'file://' , (t2f2tRoot / 'specs' / 'file.ston') pathString.
+	targetFormat = 'tonel'
+		ifTrue: [ 
+			targetProject := tonelProject.
+			sourceProject := filetreeProject ]
+		ifFalse: [ 
+			targetFormat = 'filetree'
+				ifTrue: [ 
+					targetProject := filetreeProject.
+					sourceProject := tonelProject ]
+				ifFalse: [ 
+					self
+						error:
+							'unknown format ' , targetFormat printString , '. Should be [ tonel | filetree]'
+						to: stdout ] ].
+	self _copyPackagesFrom: sourceProject to: targetProject
+]
+
+{ #category : 'filetree/tonel commands' }
+T2F2TConversion >> convertToFiletreePackagesUsing: t2f2tPath stdout: stdout [
+	^ self convertTo: 'filetree' packagesUsing: t2f2tPath stdout: stdout
+]
+
+{ #category : 'filetree/tonel commands' }
+T2F2TConversion >> convertToTonelPackagesUsing: t2f2tPath stdout: stdout [
+	^ self convertTo: 'tonel' packagesUsing: t2f2tPath stdout: stdout
 ]
 
 { #category : 'create command' }
