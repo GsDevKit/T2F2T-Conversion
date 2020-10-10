@@ -24,6 +24,37 @@ T2F2TConversion class >> executeCommandLine [
 	self new processCommandLine: GsFile stdout
 ]
 
+{ #category : 'create command' }
+T2F2TConversion >> _createProject: projectName packageConvention: packageConvention root: root t2f2tDir: t2f2tDir packageDir: packageDir componentName: componentName format: format [
+	| project resolvedProject |
+	project := (Rowan newProjectNamed: projectName)
+		packageConvention: packageConvention;
+		packageFormat: format;
+		diskUrl: 'file://' , root pathString;
+		projectSpecFile: t2f2tDir , '/' , format , '.ston';
+		revision: 'gemstone';
+		specName: format;
+		yourself.
+	project _projectSpecification
+		componentsPath: t2f2tDir , '/components';
+		packagesPath: packageDir;
+		projectsPath: t2f2tDir , '/projects';
+		specsPath: t2f2tDir , '/specs';
+		projectSpecPath: t2f2tDir;
+		specName: format.
+
+	project addTopLevelComponentNamed: componentName.
+
+	resolvedProject := project resolve.
+	Rowan projectTools createV2
+		createResolvedProjectRepository: resolvedProject repository.
+	resolvedProject
+		exportProjectSpecification;
+		exportProjects;
+		exportComponents;
+		exportLoadSpecification
+]
+
 { #category : 'private' }
 T2F2TConversion >> _manPagePath [
 	^ 'docs/man.txt'
@@ -39,15 +70,49 @@ T2F2TConversion >> _message: message to: stdout [
 ]
 
 { #category : 'create command' }
-T2F2TConversion >> createForProject: projectRootPath t2f2t: t2f2tDir tonel: tonelPackageDir filetree: filePackageDir stdout: stdout [
-	| projectRoot |
+T2F2TConversion >> createForProject: projectRootPath t2f2t: t2f2tDir tonel: tonelPackageDir filetree: filetreePackageDir projectName: projectName componentName: componentName packageConvention: packageConvention stdout: stdout [
+	| projectRoot t2f2tRoot |
 	projectRoot := projectRootPath asFileReference.
 	projectRoot exists
 		ifFalse: [ 
 			^ self
 				error:
 					'The project directory ' , projectRootPath printString , ' does not exist.'
-				to: stdout ]
+				to: stdout ].
+	t2f2tRoot := projectRoot.
+
+	(projectRoot / tonelPackageDir) ensureCreateDirectory.
+	self
+		_createProject: projectName
+		packageConvention: packageConvention
+		root: t2f2tRoot
+		t2f2tDir: t2f2tDir
+		packageDir: tonelPackageDir
+		componentName: componentName
+		format: 'tonel'.
+
+	(projectRoot / filetreePackageDir) ensureCreateDirectory.
+	self
+		_createProject: projectName
+		packageConvention: packageConvention
+		root: t2f2tRoot
+		t2f2tDir: t2f2tDir
+		packageDir: filetreePackageDir
+		componentName: componentName
+		format: 'filetree'
+]
+
+{ #category : 'create command' }
+T2F2TConversion >> createForProject: projectRootPath t2f2t: t2f2tDir tonel: tonelPackageDir filetree: filePackageDir stdout: stdout [
+	^ self
+		createForProject: projectRootPath
+		t2f2t: t2f2tDir
+		tonel: tonelPackageDir
+		filetree: filePackageDir
+		projectName: 't2f2tMeta'
+		componentName: 'Core'
+		packageConvention: 'RowanHybrid'
+		stdout: stdout
 ]
 
 { #category : 'accessing' }
