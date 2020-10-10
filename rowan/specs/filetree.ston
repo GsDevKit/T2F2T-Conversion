@@ -1,0 +1,10 @@
+RwLoadSpecificationV2 {
+	#projectName : 'filetree',
+	#gitUrl : 'file:///home/dhenrich/rogue/_homes/rogue/_home/shared/repos/T2F2T-Conversion',
+	#revision : 'gemstone',
+	#projectSpecFile : 'rowan/filetree.ston',
+	#componentNames : [
+		'Core'
+	],
+	#comment : 't2f2t load specification for filetree format packages'
+}

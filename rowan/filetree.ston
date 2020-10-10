@@ -1,0 +1,11 @@
+RwProjectSpecificationV2 {
+	#specName : 'filetree',
+	#projectSpecPath : 'rowan',
+	#componentsPath : 'rowan/components',
+	#packagesPath : 'tonel',
+	#projectsPath : 'rowan/projects',
+	#specsPath : 'rowan/specs',
+	#packageFormat : 'filetree',
+	#packageConvention : 'Rowan',
+	#comment : 't2f2t project specification for using filetree format packages'
+}

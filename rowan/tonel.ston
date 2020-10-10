@@ -1,11 +1,11 @@
 RwProjectSpecificationV2 {
-	#specName : 'T2F2T-Conversion',
+	#specName : 'tonel',
 	#projectSpecPath : 'rowan',
 	#componentsPath : 'rowan/components',
-	#packagesPath : 'rowan/src',
+	#packagesPath : 'tonel',
 	#projectsPath : 'rowan/projects',
 	#specsPath : 'rowan/specs',
 	#packageFormat : 'tonel',
 	#packageConvention : 'Rowan',
-	#comment : ''
+	#comment : 't2f2t project specification for using tonel format packages'
 }

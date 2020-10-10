@@ -1,10 +1,10 @@
 RwLoadSpecificationV2 {
-	#projectName : 'T2F2T-Conversion',
+	#projectName : 'tonel',
 	#gitUrl : 'file:///home/dhenrich/rogue/_homes/rogue/_home/shared/repos/T2F2T-Conversion',
 	#revision : 'gemstone',
-	#projectSpecFile : 'rowan/T2F2T-Conversion.ston',
+	#projectSpecFile : 'rowan/tonel.ston',
 	#componentNames : [
 		'Core'
 	],
-	#comment : ''
+	#comment : 't2f2t load specification for tonel format packages'
 }
