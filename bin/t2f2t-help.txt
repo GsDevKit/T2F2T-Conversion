@@ -1,10 +1,10 @@
 SYNOPSIS:
 	t2f2t.sh [-h | --help]
 
-	t2f2t.sh --tonel=<tonel-pkg-dir> --filetree=<filetree-pkg-dir> --t2f2t=<t2f2t-data-dir>
+	t2f2t.sh create <tonel-pkg-dir> <filetree-pkg-dir> <t2f2t-data-dir>
 
-	t2f2t.sh --t2f <t2f2t-data-dir>
-	t2f2t.sh --f2t <t2f2t-data-dir>
+	t2f2t.sh filetree <t2f2t-data-dir>
+	t2f2t.sh tonel <t2f2t-data-dir>
 
 OPTIONS
 	-h, --help
