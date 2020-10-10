@@ -26,9 +26,12 @@ T2F2TConversion class >> executeCommandLine [
 
 { #category : 'filetree/tonel commands' }
 T2F2TConversion >> _copyPackagesFrom: sourceProject to: targetProject [
-	| packageNames |
-	sourceProject readPackageNames: packageNames.
-	self halt
+	sourceProject
+		readPackageNamesBlock: [ :packageName | 
+			"read all of the packages"
+			true ].
+	targetProject packages: sourceProject packages.
+	targetProject exportPackages
 ]
 
 { #category : 'create command' }
@@ -40,14 +43,13 @@ T2F2TConversion >> _createProject: projectName packageConvention: packageConvent
 		diskUrl: 'file://' , root pathString;
 		projectSpecFile: t2f2tDir , '/' , format , '.ston';
 		specName: format;
-		yourself.
-	project _projectSpecification
 		componentsPath: t2f2tDir , '/components';
 		packagesPath: packageDir;
 		projectsPath: t2f2tDir , '/projects';
 		specsPath: t2f2tDir , '/specs';
 		projectSpecPath: t2f2tDir;
-		specName: format.
+		projectSpecName: format;
+		yourself.
 
 	project addTopLevelComponentNamed: componentName.
 
@@ -158,7 +160,7 @@ T2F2TConversion >> createForProject: projectRootPath t2f2t: t2f2tDir tonel: tone
 		filetree: filePackageDir
 		projectName: 't2f2tMeta'
 		componentName: 'Core'
-		packageConvention: 'RowanHybrid'
+		packageConvention: 'Monticello'
 		stdout: stdout
 ]
 
