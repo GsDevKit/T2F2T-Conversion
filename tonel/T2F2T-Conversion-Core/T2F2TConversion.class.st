@@ -26,6 +26,9 @@ T2F2TConversion class >> executeCommandLine [
 
 { #category : 'filetree/tonel commands' }
 T2F2TConversion >> _copyPackagesFrom: sourceProject to: targetProject [
+	| packageNames |
+	sourceProject readPackageNames: packageNames.
+	self halt
 ]
 
 { #category : 'create command' }
@@ -85,7 +88,7 @@ T2F2TConversion >> convertTo: targetFormat packagesUsing: t2f2tPath stdout: stdo
 	tonelProject := Rowan
 		projectFromUrl: 'file://' , (t2f2tRoot / 'specs' / 'tonel.ston') pathString.
 	filetreeProject := Rowan
-		projectFromUrl: 'file://' , (t2f2tRoot / 'specs' / 'file.ston') pathString.
+		projectFromUrl: 'file://' , (t2f2tRoot / 'specs' / 'filetree.ston') pathString.
 	targetFormat = 'tonel'
 		ifTrue: [ 
 			targetProject := tonelProject.
