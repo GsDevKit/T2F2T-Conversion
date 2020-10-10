@@ -3,7 +3,7 @@
   set u SystemUser p swordfish
   login
 
-	display oops
+	display classoops
 
 	run
 	| rootDir specFile |

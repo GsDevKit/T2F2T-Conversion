@@ -38,7 +38,7 @@ T2F2TConversion >> _message: message to: stdout [
 		lf
 ]
 
-{ #category : 'create' }
+{ #category : 'create command' }
 T2F2TConversion >> createForProject: projectRootPath t2f2t: t2f2tDir tonel: tonelPackageDir filetree: filePackageDir stdout: stdout [
 	| projectRoot |
 	projectRoot := projectRootPath asFileReference.
@@ -52,7 +52,7 @@ T2F2TConversion >> createForProject: projectRootPath t2f2t: t2f2tDir tonel: tone
 
 { #category : 'accessing' }
 T2F2TConversion >> debug [
-	^ debug ifNil: [ true ]
+	^ debug ifNil: [ false ]
 ]
 
 { #category : 'accessing' }
