@@ -6,6 +6,9 @@ See project readme (https://github.com/GsDevKit/T2F2T-Conversion#t2f2t-conversio
 Class {
 	#name : 'T2F2TConversion',
 	#superclass : 'Object',
+	#instVars : [
+		'debug'
+	],
 	#category : 'T2F2T-Conversion-Core'
 }
 
@@ -36,7 +39,32 @@ T2F2TConversion >> _message: message to: stdout [
 ]
 
 { #category : 'create' }
-T2F2TConversion >> createForProject: projectRoot t2f2t: t2f2tDir tonel: tonelPackageDir filetree: filePackageDir [
+T2F2TConversion >> createForProject: projectRootPath t2f2t: t2f2tDir tonel: tonelPackageDir filetree: filePackageDir stdout: stdout [
+	| projectRoot |
+	projectRoot := projectRootPath asFileReference.
+	projectRoot exists
+		ifFalse: [ 
+			^ self
+				error:
+					'The project directory ' , projectRootPath printString , ' does not exist.'
+				to: stdout ]
+]
+
+{ #category : 'accessing' }
+T2F2TConversion >> debug [
+	^ debug ifNil: [ true ]
+]
+
+{ #category : 'accessing' }
+T2F2TConversion >> debug: object [
+	debug := object
+]
+
+{ #category : 'error handling' }
+T2F2TConversion >> error: errorMessage to: stdout [
+	self debug
+		ifTrue: [ ^ super error: errorMessage ].
+	self _message: errorMessage to: stdout
 ]
 
 { #category : 'command-line support' }
@@ -49,7 +77,7 @@ T2F2TConversion >> processCommandLine: stdout [
 	scriptArgStart = 0
 		ifTrue: [ 
 			^ self
-				_message:
+				error:
 					'topaz solo launched without '' -- '', so it is not possible to process command line arguments'
 				to: stdout ].
 
@@ -64,41 +92,44 @@ T2F2TConversion >> processCommandLine: stdout [
 				ifTrue: [ ^ self usageMessage: stdout ].
 			command
 				ifNil: [ 
-					(#('create' 'filetree' 'tonel') includes: arg)
+					(#('create' 'filetree' 'tonel' '--debug') includes: arg)
 						ifFalse: [ 
 							^ self
-								_message:
+								error:
 									'UNKNOWN command ' , arg printString
 										, '. Command should be one of [create | filetree | tonel ]'
 								to: stdout ].
-					command := arg ]
+					arg = '--debug'
+						ifTrue: [ self debug: true ]
+						ifFalse: [ command := arg ] ]
 				ifNotNil: [ commandArgs add: arg ] ].
 	command = 'create'
 		ifTrue: [ 
 			commandArgs size ~= 4
 				ifTrue: [ 
 					^ self
-						_message:
+						error:
 							'expected 4 positional arguments for create command (project-root, t2f2t-data-dir, tonel-pkg-dir, and filetree-pkg-dir), got '
 								, commandArgs size printString
 						to: stdout ].
 			^ self
 				createForProject: (commandArgs at: 1)
-				t2f2t:  (commandArgs at: 2)
+				t2f2t: (commandArgs at: 2)
 				tonel: (commandArgs at: 3)
-				filetree: (commandArgs at: 4) ].
+				filetree: (commandArgs at: 4)
+				stdout: stdout ].
 	commandArgs size ~= 1
 		ifTrue: [ 
 			^ self
-				_message:
+				error:
 					'expected 1 positional arguments for ' , command
 						, ' command (t2f2t-data-dir), got ' , commandArgs size printString
 				to: stdout ].
 
 	command = 'filetree'
-		ifTrue: [ ^ self convertToFiletreePackagesUsing: (commandArgs at: 1) ].
+		ifTrue: [ ^ self convertToFiletreePackagesUsing: (commandArgs at: 1) stdout: stdout ].
 	command = 'tonel'
-		ifTrue: [ ^ self convertToTonelPackagesUsing: (commandArgs at: 1) ]
+		ifTrue: [ ^ self convertToTonelPackagesUsing: (commandArgs at: 1) stdout: stdout ]
 ]
 
 { #category : 'command-line support' }

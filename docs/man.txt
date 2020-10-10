@@ -1,10 +1,13 @@
 SYNOPSIS:
 	t2f2t.sh [-h | --help]
 
-	t2f2t.sh create <project-root> <t2f2t-data-dir> <tonel-pkg-dir> <filetree-pkg-dir> 
+	t2f2t.sh [--debug ] create <project-root> <t2f2t-data-dir> <tonel-pkg-dir> <filetree-pkg-dir> 
 
-	t2f2t.sh filetree <t2f2t-data-dir-path>
-	t2f2t.sh tonel <t2f2t-data-dir-path>
+	t2f2t.sh  [--debug ] filetree <t2f2t-data-dir-path>
+	t2f2t.sh  [--debug ] tonel <t2f2t-data-dir-path>
+OPTIONS
+	--debug
+		If present a smalltalk debugger will be invoked when an error occurs.
 
 DESCRIPTION
 	The t2f2t.sh script converts tonel packages to filetree packages using Rowan
@@ -31,8 +34,11 @@ DESCRIPTION
 
 EXAMPLES:
 	t2f2t.sh create /home/dhenrich/XML-XMLParser t2f2t src filetree
+	t2f2t.sh --debug create /home/dhenrich/XML-XMLParser t2f2t src filetree
 
 	t2f2t.sh filetree /home/dhenrich/XML-XMLParser/t2f2t
+	t2f2t.sh --debug filetree /home/dhenrich/XML-XMLParser/t2f2t
 
 	t2f2t.sh tonel /home/dhenrich/XML-XMLParser/t2f2t
+	t2f2t.sh --debug tonel /home/dhenrich/XML-XMLParser/t2f2t
 
