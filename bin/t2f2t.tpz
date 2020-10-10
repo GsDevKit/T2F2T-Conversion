@@ -10,9 +10,14 @@
 	"install the script code into the topaz solo image"
 	rootDir := '$binDir/..' asFileReference pathString.
 	specFile := rootDir, '/rowan/specs/T2F2T-Conversion.ston' asFileReference pathString.
-	(Rowan
-		projectFromUrl: 'file://', specFile
-		gitUrl: 'file://', rootDir) load
+	[
+		(Rowan
+			projectFromUrl: 'file://', specFile
+			gitUrl: 'file://', rootDir) load ]
+		on: Warning
+		do: [:ex | 
+			"ignore warnings during load"
+			ex resume ]
 %
 
 run

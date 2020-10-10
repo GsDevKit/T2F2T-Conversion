@@ -17,13 +17,19 @@ T2F2TConversion class >> executeCommandLine [
 ]
 
 { #category : 'private' }
+T2F2TConversion >> _helpFileName [
+	^ 't2f2t-help.txt'
+]
+
+{ #category : 'private' }
 T2F2TConversion >> _message: message to: stdout [
 	stdout
 		lf;
 		nextPutAll: message;
 		lf;
-		lf.
-	self usageMessage: stdout
+		tab;
+		nextPutAll: 'See help (t2t2t.sh --help) for details';
+		lf
 ]
 
 { #category : 'command-line support' }
@@ -96,28 +102,12 @@ T2F2TConversion >> processCommandLine: stdout [
 
 { #category : 'command-line support' }
 T2F2TConversion >> usageMessage: stdout [
-	"this method and the project README.md man page section (https://github.com/GsDevKit/T2F2T-Conversion#man-page) should be kept in sync"
-
-	stdout
-		lf;
-		nextPutAll: 'SYNOPSIS:';
-		lf;
-		lf;
-		nextPutAll: '	t2f2t.sh [-h | --help]';
-		lf;
-		nextPutAll:
-				'	t2f2t.sh --t2f <source-package-directory> <destination-package-directory';
-		lf;
-		nextPutAll:
-				'	t2f2t.sh --f2t <source-package-directory> <destination-package-directory';
-		lf;
-		lf;
-		nextPutAll: 'DESCRIPTION';
-		lf;
-		lf;
-		nextPutAll: 'EXAMPLES:';
-		lf;
-		nextPutAll: '	t2f2t.sh';
-		lf;
-		lf
+	| root read |
+	root := (Rowan projectNamed: self class _projectName) repositoryRoot.
+	read := ReadStreamPortable on: (root / 'bin' / self _helpFileName) contents.
+	[ read atEnd ]
+		whileFalse: [ 
+			stdout
+				nextPutAll: read nextLine;
+				lf ]
 ]
