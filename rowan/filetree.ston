@@ -2,7 +2,7 @@ RwProjectSpecificationV2 {
 	#specName : 'filetree',
 	#projectSpecPath : 'rowan',
 	#componentsPath : 'rowan/components',
-	#packagesPath : 'tonel',
+	#packagesPath : 'filetree',
 	#projectsPath : 'rowan/projects',
 	#specsPath : 'rowan/specs',
 	#packageFormat : 'filetree',

@@ -1,0 +1,14 @@
+{
+	"category" : "T2F2T-Conversion-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"debug" ],
+	"name" : "T2F2TConversion",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
