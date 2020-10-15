@@ -3,6 +3,9 @@
   set u SystemUser p swordfish
   login
 
+	iferr 1 stk
+	iferr 2 stack
+
 	display oops
 
 	run
