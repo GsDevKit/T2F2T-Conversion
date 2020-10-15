@@ -13,8 +13,8 @@
 	"install the script code into the topaz solo image"
 	[
 		(Rowan
-			projectFromUrl: 'file:$binDir/..', specFile
-			gitUrl: 'file:$binDir/../rowan/specs/tonel.ston') load ]
+			projectFromUrl: 'file:$ROWAN_PROJECTS_HOME/T2F2T-Conversion/rowan/specs/tonel.ston'
+			gitUrl: 'file:$ROWAN_PROJECTS_HOME/T2F2T-Conversion') load ]
 		on: Warning
 		do: [:ex | 
 			"ignore warnings during load"

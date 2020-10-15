@@ -2,7 +2,7 @@ language: bash
 sudo: true
 
 env:
-  - INSTALL_SCRIPT="bin/install.sh"
+  - INSTALL_SCRIPT="bin/install.sh" ROWAN_PROJECTS_HOME="$TRAVIS_BUILD_DIR"
 
 before_script:
     - pwd
@@ -12,7 +12,8 @@ before_script:
     - ls -altr bin/gs_350
 
 script:
-- export ROWAN_PROJECTS_HOME="`pwd`/.."
+- echo $TRAVIS_BUILD_DIR
+- echo $ROWAN_PROJECTS_HOME
 - bash bin/t2f2t.sh filetree rowan
 - bash ls -altr
 - bash git status
