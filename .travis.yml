@@ -2,7 +2,7 @@ language: bash
 sudo: true
 
 env:
-  - INSTALL_SCRIPT="bin/install.sh" ROWAN_PROJECTS_HOME="$TRAVIS_BUILD_DIR"
+  - INSTALL_SCRIPT="bin/install.sh" ROWAN_PROJECTS_HOME="$TRAVIS_BUILD_DIR/.."
 
 before_script:
     - pwd
