@@ -14,6 +14,5 @@ before_script:
 script:
 - echo $TRAVIS_BUILD_DIR
 - echo $ROWAN_PROJECTS_HOME
-- bash bin/t2f2t.sh filetree rowan
-- ls -altr
-- git status
+- bash bin/t2f2t.sh filetree rowan  # convert tonel format to filetree format --- expect filetree to be updated before push to github
+- if [ ! -z "$(git status --porcelain)" ]  ; then echo "FAIL: unexpected changes in filetree directory"; exit 1; else echo "successful test"; fi
