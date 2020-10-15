@@ -15,5 +15,5 @@ script:
 - echo $TRAVIS_BUILD_DIR
 - echo $ROWAN_PROJECTS_HOME
 - bash bin/t2f2t.sh filetree rowan
-- bash ls -altr
-- bash git status
+- ls -altr
+- git status
