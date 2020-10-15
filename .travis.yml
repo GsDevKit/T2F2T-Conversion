@@ -1,0 +1,16 @@
+language: bash
+sudo: true
+
+env:
+  - INSTALL_SCRIPT="bin/install.sh"
+
+before_script:
+    - $INSTALL_SCRIPT 
+    - ls -altr
+    - ls -altr bin
+    - ls -altr bin/gs_350
+
+script:
+- bash bin/t2f2t.sh filetree rowan
+- bash ls -altr
+- bash git status
