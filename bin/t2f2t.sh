@@ -6,7 +6,7 @@ export binDir="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 export GEMSTONE="$binDir/gs_350/GemStone64Bit3.5.0-x86_64.Linux"
 
 if [ "$ROWAN_PROJECTS_HOME"x = "x" ] ; then
-	export ROWAN_PROJECTS_HOME="$binDir/.."
+	export ROWAN_PROJECTS_HOME="$binDir/../.."
 fi
 
 if [ "$*" = "-h" ] || [ "$*" = "--help" ] ; then
