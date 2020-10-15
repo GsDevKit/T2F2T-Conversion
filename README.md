@@ -20,11 +20,12 @@ Run the following scripts from the T2F2T-Conversion project directory:
    ```
 2. Prepare the `tonel` package directory for reading by Rowan. `#convention : 'Monticello'` informs Rowan that the packages in this directory will be expected to conform to the Monticello conventions where class category begins with the name of package and the method categories for extension methods begins with `*case-insensitive-package-name`:
    ```bash
-   cat - > <path-to-target-project-dir>/<package-directory-path>/.properties
+   cat - > <path-to-target-project-dir>/<package-directory-path>/.properties << EOF
    {
    	#format : #tonel,
    	#convention : 'Monticello'
    }
+   EOF
    ```
 3. Copy the packages in the `tonel` package directory to the `filetree` package directory, converting to filetree format:
    ```bash
