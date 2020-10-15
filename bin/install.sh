@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 #
+set -ex
+
 export binDir="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 releaseVersion="v1.0.0-beta"
@@ -43,8 +45,10 @@ if [ "$GS_HOME"x = "x" ] ; then
 			exit 1
   	fi
 	fi
-	$cmd ${ftp_address}/pub/GemStone64/3.5.0/$dl_gss_file
-	unzip $dl_gss_file
+	pushd $binDir/gs_350
+		$cmd ${ftp_address}/pub/GemStone64/3.5.0/$dl_gss_file
+		unzip $dl_gss_file
+	popd
 else
 	$GS_HOME/bin/downloadGemStone 3.5.0
 	pushd $binDir/gs_350
