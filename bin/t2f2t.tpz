@@ -10,14 +10,11 @@
 	display oops
 
 	run
-	| rootDir specFile |
 	"install the script code into the topaz solo image"
-	rootDir := '$binDir/..' asFileReference pathString.
-	specFile := rootDir, '/rowan/specs/tonel.ston' asFileReference pathString.
 	[
 		(Rowan
-			projectFromUrl: 'file://', specFile
-			gitUrl: 'file://', rootDir) load ]
+			projectFromUrl: 'file:$binDir/..', specFile
+			gitUrl: 'file:$binDir/../rowan/specs/tonel.ston') load ]
 		on: Warning
 		do: [:ex | 
 			"ignore warnings during load"

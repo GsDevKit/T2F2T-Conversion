@@ -5,12 +5,14 @@ env:
   - INSTALL_SCRIPT="bin/install.sh"
 
 before_script:
+    - pwd
     - $INSTALL_SCRIPT 
     - ls -altr
     - ls -altr bin
     - ls -altr bin/gs_350
 
 script:
+- export ROWAN_PROJECTS_HOME="`pwd`/.."
 - bash bin/t2f2t.sh filetree rowan
 - bash ls -altr
 - bash git status
