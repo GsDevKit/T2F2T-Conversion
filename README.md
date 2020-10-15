@@ -1,6 +1,6 @@
 # T2F2T-Conversion
 
-[![Build Status](https://travis-ci.org/GsDevKit/T2F2T-Conversion.svg?branch=gemstone)](https://travis-ci.org/GsDevKit/T2F2T-Conversion)
+[![Build Status](https://travis-ci.org/GsDevKit/T2F2T-Conversion.svg?branch=master)](https://travis-ci.org/GsDevKit/T2F2T-Conversion)
 
 Rowan-based scripts for converting package repositories from Tonel to Filetree and Filetree to Tonel format.
 
