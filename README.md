@@ -16,7 +16,7 @@ bin/install.sh
 Run the following scripts from the T2F2T-Conversion project directory:
 1. Create the t2f2t meta data file in the target project directory (`t2f2t`):
    ```bash
-   bin/t2f2t.sh --create <path-to-target-project-dir> t2f2t src filetree
+   bin/t2f2t.sh create <path-to-target-project-dir> t2f2t src filetree
    ```
 2. Prepare the `tonel` package directory for reading by Rowan. `#convention : 'Monticello'` informs Rowan that the packages in this directory will be expected to conform to the Monticello conventions where class category begins with the name of package and the method categories for extension methods begins with `*case-insensitive-package-name`:
    ```bash
